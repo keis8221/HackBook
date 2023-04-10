@@ -2,11 +2,33 @@ version: "3.8"
 
 services:
   api:
+    container_name: gin_practice_project
     build:
       context: .
       dockerfile: ./docker/go/Dockerfile
     ports:
-      - "3000:8080"
+      - "3000:3000"
     volumes:
       - ./api/:/go/src
+    networks:
+      - gin_next
     tty: true
+
+  frontend:
+    container_name: next_practice_project
+    build:
+      context: .
+      dockerfile: ./docker/frontend/Dockerfile
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./frontend/:/app
+      # exclude node_modules from being mounted
+      - /app/node_modules
+    command: sh -c "cd frontend && yarn install && yarn dev"
+    networks:
+      - gin_next
+
+networks:
+  gin_next:
+    name: gin_next
