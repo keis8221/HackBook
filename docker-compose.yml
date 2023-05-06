@@ -8,10 +8,12 @@ services:
       dockerfile: ./docker/go/Dockerfile
     ports:
       - "8080:8080"
+    depends_on:
+      - db
     volumes:
       - ./api/:/go/src
     networks:
-      - gin_next
+      - surprise
     tty: true
 
   frontend:
@@ -29,8 +31,28 @@ services:
       - /app/node_modules
     command: sh -c "yarn install && yarn dev"
     networks:
-      - gin_next
+      - surprise
+
+  db:
+    build:
+      context: .
+      dockerfile: ./docker/db/Dockerfile
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - db-store:/var/lib/postgresql/data
+      - ./app/database/init:/docker-entrypoint-initdb.d
+    ports:
+      - ${DB_PORT}:5432
+    networks:
+      - surprise
+    restart: always
+
+volumes:
+  db-store:
 
 networks:
-  gin_next:
-    name: gin_next
+  surprise:
+    name: surprise
