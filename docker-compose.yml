@@ -8,6 +8,8 @@ services:
       dockerfile: ./docker/go/Dockerfile
     ports:
       - "8080:8080"
+    depends_on:
+      - db
     volumes:
       - ./api/:/go/src
     networks:
