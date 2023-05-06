@@ -10,6 +10,8 @@ services:
     volumes:
       - ./frontend/public:/usr/share/nginx/html
       # - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - surprise
     depends_on:
       - api
       - frontend
