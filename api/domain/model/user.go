@@ -12,5 +12,7 @@ type User struct {
 	Zipcode   string    `json:"zipcode"`
 	Address   string    `json:"address"`
 	Sex				string 	  `json:"sex"`
+	Account   Account   `gorm:"foreignKey:UserId;"`
+	Categories []Category `gorm:"many2many:user_categories;"`
 	gorm.Model
 }
