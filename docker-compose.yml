@@ -49,6 +49,7 @@ services:
       - surprise
 
   db:
+    container_name: surprise_postgresql
     build:
       context: .
       dockerfile: ./docker/db/Dockerfile
