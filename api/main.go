@@ -1,6 +1,9 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"github.com/keis8221/surprise/api/db"
+)
 
 func main() {
 	r := gin.Default()
@@ -10,4 +13,6 @@ func main() {
 			})
 	})
 	r.Run()
+	
+	db.Init()
 }
