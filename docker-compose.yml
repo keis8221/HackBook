@@ -59,7 +59,7 @@ services:
       - POSTGRES_PASSWORD=${DB_PASSWORD}
     volumes:
       - db-store:/var/lib/postgresql/data
-      - ./app/database/init:/docker-entrypoint-initdb.d
+      - ./api/db/init:/docker-entrypoint-initdb.d
     ports:
       - ${DB_PORT}:5432
     networks:
