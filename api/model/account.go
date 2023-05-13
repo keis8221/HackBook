@@ -1,4 +1,4 @@
-package entity
+package model
 
 import (
 	"gorm.io/gorm"
@@ -11,4 +11,9 @@ type Account struct {
 	Status    string    `json:"status"`
 	UserId		uint      `json:"user_id"`
 	gorm.Model
+}
+
+type account struct {
+	Email     string    `json:"email"`
+	Password  string    `json:"password"`
 }
