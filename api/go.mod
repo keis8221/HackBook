@@ -1,4 +1,4 @@
-module github.com/keis8221/surprise/api
+module surprise
 
 go 1.19
 

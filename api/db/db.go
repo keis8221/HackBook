@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	entity "github.com/keis8221/surprise/api/domain/model"
+	model "surprise/domain/model"
+
 	"gorm.io/driver/postgres"
 
 	_ "github.com/jinzhu/gorm/dialects/postgres"
@@ -42,6 +43,14 @@ func GetDB() *gorm.DB {
 	return DB
 }
 
+func Close() {
+	db, err := DB.DB()
+	if err != nil {
+		panic(err)
+	}
+	db.Close()
+}
+
 func autoMigration() {
-	DB.AutoMigrate(&entity.User{}, &entity.Account{}, &entity.Category{})
+	DB.AutoMigrate(&model.User{}, &model.Account{}, &model.Category{})
 }

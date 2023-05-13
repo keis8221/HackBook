@@ -1,8 +1,9 @@
 package main
 
 import (
+	"surprise/db"
+
 	"github.com/gin-gonic/gin"
-	"github.com/keis8221/surprise/api/db"
 )
 
 func main() {
@@ -15,4 +16,5 @@ func main() {
 	r.Run()
 	
 	db.Init()
+	db.Close()
 }
