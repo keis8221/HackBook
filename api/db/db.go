@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	model "surprise/domain/model"
+	model "surprise/model"
 
 	"gorm.io/driver/postgres"
 
