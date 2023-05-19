@@ -2,8 +2,9 @@ package handler
 
 import (
 	"net/http"
-	"surprise/account"
-	"surprise/model"
+
+	"github.com/keis8221/surprise/api/account"
+	"github.com/keis8221/surprise/api/model"
 
 	"github.com/gin-gonic/gin"
 )

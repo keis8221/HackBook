@@ -1,8 +1,8 @@
 package usecase
 
 import (
-	"surprise/account"
-	"surprise/model"
+	"github.com/keis8221/surprise/api/account"
+	"github.com/keis8221/surprise/api/model"
 )
 
 type AccountUsecaseImpl struct {

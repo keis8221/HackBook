@@ -1,7 +1,7 @@
 package account
 
 import (
-	"surprise/model"
+	"github.com/keis8221/surprise/api/model"
 )
 
 type AccountUsecase interface {
