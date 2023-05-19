@@ -27,6 +27,7 @@ services:
       - db
     volumes:
       - ./api/:/go/src
+      - .env:/usr/local/go/src/surprise/.env
     networks:
       - surprise
     tty: true

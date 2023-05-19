@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"os"
 
-	entity "github.com/keis8221/surprise/api/domain/model"
-	"gorm.io/driver/postgres"
+	model "github.com/keis8221/surprise/api/model"
 
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/joho/godotenv"
+	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
@@ -17,9 +17,9 @@ var (
 	err error
 )
 
-func Init() {
-	env := os.Getenv("ENV")
-
+func Init() *gorm.DB {
+	godotenv.Load(".env")
+	env := os.Getenv("ENVIRONMENT")
 	if "production" == env {
 		env = "production"
 	} else {
@@ -36,12 +36,21 @@ func Init() {
 	}
 
 	autoMigration()
+	return DB
 }
 
 func GetDB() *gorm.DB {
 	return DB
 }
 
+// func Close(db *gorm.DB) {
+
+// 	if err != nil {
+// 		panic(err)
+// 	}
+// 	dbDB.Close()
+// }
+
 func autoMigration() {
-	DB.AutoMigrate(&entity.User{}, &entity.Account{}, &entity.Category{})
+	DB.AutoMigrate(&model.User{}, &model.Account{}, &model.Category{})
 }
