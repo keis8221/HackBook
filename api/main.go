@@ -2,33 +2,35 @@ package main
 
 import (
 	"log"
-	"os"
-	"surprise/db"
 
-	accountHandler "surprise/account/handler"
-	accountRepo "surprise/account/repository"
-	accountUsecase "surprise/account/usecase"
+	"github.com/joho/godotenv"
+	"github.com/keis8221/surprise/api/db"
+
+	accountHandler "github.com/keis8221/surprise/api/account/handler"
+	accountRepo "github.com/keis8221/surprise/api/account/repository"
+	accountUsecase "github.com/keis8221/surprise/api/account/usecase"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
+	DB := db.Init()
+	defer func() {
+		db, err := DB.DB()
+		db.Close()
+		if err != nil {
+			log.Fatal(err)
+		}
+	}()
+
 	router := gin.Default()
-	// r.GET("/", func(c *gin.Context) {
-	// 		c.JSON(200, gin.H{
-	// 			"message": "Hello, World!!",
-	// 		})
-	// })
-	
-	db.Init()
-	db.Close()
+	godotenv.Load(".env.development")	
 
-
-	accountRepo := accountRepo.NewAccountRepo(db.GetDB())
+	accountRepo := accountRepo.NewAccountRepo(DB)
 	accountUsecase := accountUsecase.NewAccountUsecase(accountRepo)
 	accountHandler.NewAccountHandler(router, accountUsecase)
 
-	err := router.Run("localhost:" + os.Getenv("PORT"))
+	err := router.Run()
 	if err != nil {
 		log.Fatal(err)
 	}
