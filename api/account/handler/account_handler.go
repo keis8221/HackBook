@@ -20,7 +20,7 @@ func NewAccountHandler(r *gin.Engine, accountUsecase account.AccountUsecase) {
 
 func (ah *AccountHandler) signup(c *gin.Context) {
 	account := model.Account{}
-	account.Status =  "MEMBER"
+	account.Status = "MEMBER"
 	err := c.BindJSON(&account)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, "Internal Server Error")

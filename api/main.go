@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 
+	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	"github.com/keis8221/surprise/api/db"
 
@@ -10,7 +11,9 @@ import (
 	accountRepo "github.com/keis8221/surprise/api/account/repository"
 	accountUsecase "github.com/keis8221/surprise/api/account/usecase"
 
-	"github.com/gin-gonic/gin"
+	itemHandler "github.com/keis8221/surprise/api/item/handler"
+	itemRepo "github.com/keis8221/surprise/api/item/repository"
+	itemUsecase "github.com/keis8221/surprise/api/item/usecase"
 )
 
 func main() {
@@ -29,6 +32,10 @@ func main() {
 	accountRepo := accountRepo.NewAccountRepo(DB)
 	accountUsecase := accountUsecase.NewAccountUsecase(accountRepo)
 	accountHandler.NewAccountHandler(router, accountUsecase)
+
+	itemRepo := itemRepo.NewItemRepo(DB)
+	itemUsecase := itemUsecase.NewItemUsecase(itemRepo)
+	itemHandler.NewItemHandler(router, itemUsecase)
 
 	err := router.Run()
 	if err != nil {
