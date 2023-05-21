@@ -28,9 +28,9 @@ func (ir *ItemRepoImpl) GetItems() (*model.RakutenItems, error) {
 }
 
 func (ir *ItemRepoImpl) GetItemsFromExternalApi() (*model.RakutenItems, error) {
-	rakutenApiUrl := "https://app.rakuten.co.jp/services/api/BooksTotal/Search/20170404?applicationId=1028959429215953336&keyword=健康&isbnjan=9784478102299"
+	rakutenApiUrl := "https://app.rakuten.co.jp/services/api/BooksTotal/Search/20170404?applicationId=1028959429215953336&keyword=お金&isbnjan=9784877232900"
 	response, err := http.Get(rakutenApiUrl)
-
+  
 	body, err := ioutil.ReadAll(response.Body)
 	if err != nil {
 		return nil, err
