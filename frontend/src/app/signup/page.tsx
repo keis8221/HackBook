@@ -13,8 +13,8 @@ const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
 
 function SignUpPage() {
   return (
-    <div className='flex justify-center'>
-      <div className='mt-[15%]'>
+    <div className='flex justify-center mt-[8%]'>
+      <div>
         <h1 className='text-3xl font-bold'>Sign Up</h1>
         <form className='mt-8' onSubmit={handleSubmit}>
           <label>
