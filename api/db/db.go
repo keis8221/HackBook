@@ -43,14 +43,6 @@ func GetDB() *gorm.DB {
 	return DB
 }
 
-// func Close(db *gorm.DB) {
-
-// 	if err != nil {
-// 		panic(err)
-// 	}
-// 	dbDB.Close()
-// }
-
 func autoMigration() {
 	DB.AutoMigrate(&model.User{}, &model.Account{}, &model.Category{})
 }
