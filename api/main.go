@@ -10,10 +10,9 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/keis8221/surprise/api/db"
 
-	"github.com/keis8221/surprise/api/internal/repository"
-	accountHandler "github.com/keis8221/surprise/api/account/handler"
-	accountRepo "github.com/keis8221/surprise/api/account/repository"
-	accountUsecase "github.com/keis8221/surprise/api/account/usecase"
+	userHandler "github.com/keis8221/surprise/api/user/handler"
+	userRepo "github.com/keis8221/surprise/api/user/repository"
+	userUsecase "github.com/keis8221/surprise/api/user/usecase"
 
 	itemHandler "github.com/keis8221/surprise/api/item/handler"
 	itemRepo "github.com/keis8221/surprise/api/item/repository"
@@ -59,10 +58,10 @@ func main() {
 	}))
 	godotenv.Load(".env.development")	
 
-  txRepo := repository.NewTransaction(DB)
-	accountRepo := accountRepo.NewAccountRepo(DB)
-	accountUsecase := accountUsecase.NewAccountUsecase(accountRepo)
-	accountHandler.NewAccountHandler(router, accountUsecase)
+
+	userRepo := userRepo.NewUserRepo(DB)
+	userUsecase := userUsecase.NewUserUsecase(userRepo)
+	userHandler.NewUserHandler(router, userUsecase)
 
 	itemRepo := itemRepo.NewItemRepo(DB)
 	itemUsecase := itemUsecase.NewItemUsecase(itemRepo)
