@@ -20,25 +20,37 @@ func NewItemRepo(DB *gorm.DB) item.ItemRepo {
 }
 
 func (ir *ItemRepoImpl) GetItems() (*model.RakutenItems, error) {
-	items, err := ir.GetItemsFromExternalApi()
+	const rakutenBooksBookApiEndpoint = "https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404?applicationId=1028959429215953336"
+	
+	// fetch recommendation items from external machine learning api 
+	items, err := ir.GetItemsFromMachineLearningApi()
+	endpoint :=  rakutenBooksBookApiEndpoint + "&isbnjan= "+ (*items)[0].Isbn	
+
+	response, err := http.Get(endpoint)
+	body,  _ := ioutil.ReadAll(response.Body)	
 	if err != nil {
 		return nil, err
 	}
-	return items, nil
+
+	var resItems *model.RakutenItems
+	if err := json.Unmarshal(body, &resItems); err != nil {
+		return nil, err
+	}
+	return resItems, nil
 }
 
-func (ir *ItemRepoImpl) GetItemsFromExternalApi() (*model.RakutenItems, error) {
-	rakutenApiUrl := "https://app.rakuten.co.jp/services/api/BooksTotal/Search/20170404?applicationId=1028959429215953336&keyword=お金&isbnjan=9784877232900"
-	response, err := http.Get(rakutenApiUrl)
-  
+func (ir *ItemRepoImpl) GetItemsFromMachineLearningApi() (*model.Items, error) {
+	const mlEndpoint = "https://wey.cps.akita-pu.ac.jp/recommends"
+
+	response, err := http.Get(mlEndpoint)
 	body, err := ioutil.ReadAll(response.Body)
 	if err != nil {
 		return nil, err
 	}
 
-	var rakutenItems model.RakutenItems
-	if err := json.Unmarshal(body, &rakutenItems); err != nil {
+	var items *model.Items
+	if err := json.Unmarshal(body, &items); err != nil {
 		return nil, err
 	}
-	return &rakutenItems, nil
+	return items, nil
 }
