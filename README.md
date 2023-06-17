@@ -2,7 +2,8 @@
 An application that recommends books that a person may like by selecting images!!
 
 # Introduction
-1.  Build the docker images and launch containers by executing the following this command.
+1. Create .env file by copy .env.example to this .env file.
+2. Build the docker images and launch containers by executing the following this command.
 
 ```
 docker compose up -d --build 
