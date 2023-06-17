@@ -6,5 +6,5 @@ import (
 
 type ItemRepo interface {
 	GetItems() (*model.RakutenItems, error)
-	GetItemsFromExternalApi() (*model.RakutenItems, error)
+	GetItemsFromMachineLearningApi() (*model.Items, error)
 }

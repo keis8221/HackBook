@@ -14,7 +14,7 @@ func NewItemUsecase(itemRepo item.ItemRepo) item.ItemUsecase {
 }
 
 func (iui *ItemUsecaseImpl) GetItems() (*model.RakutenItems, error) {
-	items, err := iui.itemRepo.GetItemsFromExternalApi()
+	items, err := iui.itemRepo.GetItems()
 
 	if err != nil {
 		return nil, err

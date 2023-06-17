@@ -1,5 +1,13 @@
 package model
 
+
+type Items []struct {
+	Title		string 
+	Isbn		string 
+	itemUrl		string
+	itemPrice		string 
+}
+
 type RakutenItems struct {
 	GenreInformation []any `json:"GenreInformation"`
 	Items            []struct {
