@@ -7,7 +7,6 @@ import CardMedia from '@mui/material/CardMedia'
 import Radio from '@mui/material/Radio'
 import Typography from '@mui/material/Typography'
 import Image from 'next/image'
-// import { useRouter } from 'next/navigation'
 import React, { Suspense } from 'react'
 import { getItems } from '../api/item'
 
@@ -53,7 +52,6 @@ const ImageSelectionForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const newItem = await getItems()
-    console.log(newItem)
     setItems(newItem)
   }
 
