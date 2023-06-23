@@ -1,21 +1,6 @@
 version: "3.8"
 
 services:
-  nginx:
-    container_name: nginx_hackbook
-    build:
-      context: containers/nginx
-    ports:
-      - "80:80"
-    volumes:
-      - ./frontend/public:/usr/share/nginx/html
-      # - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
-    networks:
-      - hackbook
-    depends_on:
-      - api
-      - frontend
-
   api:
     container_name: gin_hackbook
     build:
@@ -49,6 +34,13 @@ services:
     networks:
       - hackbook
 
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./frontend/default.conf:/etc/nginx/conf.d/default.conf
+    
   db:
     container_name: postgresql_hackbook
     build:
