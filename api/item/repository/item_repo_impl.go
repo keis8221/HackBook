@@ -36,11 +36,11 @@ func (ir *ItemRepoImpl) GetItems() (*model.RakutenItems, error) {
 	if err := json.Unmarshal(body, &resItems); err != nil {
 		return nil, err
 	}
-	return resItems, nil
+	return resItems, nil 
 }
 
 func (ir *ItemRepoImpl) GetItemsFromMachineLearningApi() (*model.Items, error) {
-	const mlEndpoint = "https://wey.cps.akita-pu.ac.jp/recommends"
+	const mlEndpoint = "https://api.tomoaki-ohkawa.com/recommend"
 
 	response, err := http.Get(mlEndpoint)
 	body, err := ioutil.ReadAll(response.Body)
